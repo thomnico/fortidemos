@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fortiweb-cnf 
+spec:
+  replicas: {{.Values.replicaCount}} 
+  selector:
+    matchLabels:
+      app: fortiweb-cnf
+  template:
+    metadata:
+      labels:
+        app: fortiweb-cnf
+        app.kubernetes.io/instance: {{ .Release.Name }} 
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        image: '{{.Values.global.registry.url}}/{{ .Values.global.imageName }}:{{ .Values.global.imageTag }}'
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8
+            name: mgmt
+          - containerPort: 43
+            name: gui
+          - containerPort: 996
+            name: mgmt6
+          - containerPort: 997
+            name: mgmt7
+          - name: http
+            containerPort: 80
+            protocol: TCP
+          - name: https
+            containerPort: 443
+            protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: mgmt
+          initialDelaySeconds: 120
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: mgmt
+          initialDelaySeconds: 120
+          periodSeconds: 10
+        imagePullSecrets:
+          - name: {{ .Values.global.registry.pullSecret }}

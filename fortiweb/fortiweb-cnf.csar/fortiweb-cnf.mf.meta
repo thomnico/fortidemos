@@ -1,0 +1,5 @@
+metadata:
+vnf_product_name: fortinet-cnf
+vnf_provider_id: Fortinet
+vnf_package_version: 1
+vnf_release_date_time: 2020-22-05T13:00:00+01:00

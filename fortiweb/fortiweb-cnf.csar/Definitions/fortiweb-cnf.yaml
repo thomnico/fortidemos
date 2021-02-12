@@ -1,0 +1,76 @@
+--- 
+description: "fortiweb-cnf created to verify the lifecycle management on top of Ericsson NFVI"
+ericsson.datatypes.nfv.ChangePackageVnfOperationAdditionalParameters:
+  derived_from: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+  properties:
+    replicaCount:
+      default: 1
+      required: true
+      type: string
+metadata:
+  data_types:
+    ericsson.datatypes.nfv.InstantiateVnfOperationAdditionalParameters:
+      derived_from: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+      properties:
+        load_balancer_IP:
+          default: "10.223.160.60"
+          metadata:
+            chart_param: global.loadBalancerIP
+          required: true
+          type: string
+        replicaCount:
+          default: 1
+          required: true
+          type: string
+  name: fortiweb-cnf-descriptor
+  vendor: Fortinet
+  version: 0.5.0-1
+node_types:
+  derived_from: tosca.nodes.nfv.VNF
+  descriptor_id:
+    default: 31f8c39b-9a60-4040-bf9b-2a7a6155df1f
+    type: string
+  descriptor_version:
+    default: 0.5.0-1
+    type: string
+  interfaces:
+    Vnflcm:
+      change_package:
+        inputs:
+          additional_parameters:
+            required: false
+            type: ericsson.datatypes.nfv.ChangePackageVnfOperationAdditionalParameters
+      instantiate:
+        inputs:
+          additional_parameters:
+            required: false
+            type: ericsson.datatypes.nfv.InstantiateVnfOperationAdditionalParameters
+      terminate: ~
+      type: tosca.interfaces.nfv.Vnflcm
+    artifacts:
+      helm_package:
+        description: "Helm package associated with this descriptor"
+        file: Definitions/OtherTemplates/fortiweb-cnf-0.5.0-1.tgz
+        type: tosca.artifacts.File
+      software_images:
+        description: "Location of the CNF images being used in this package"
+        file: Files/fortiweb-6.3.7.tgz
+        type: tosca.artifacts.nfv.SwImage
+  product_name:
+    default: fortiweb-cnf
+    type: string
+  properties:
+    provider:
+      default: Fortinet
+      type: string
+  fortiweb-cnf: ~
+  software_version: 
+    default: 6.3.7
+    type: string
+  vnfm_info: 
+    default: 
+      - EVNFM
+    entry_schema: 
+      type: string
+    type: list
+tosca_definitions_version: tosca_simple_yaml_1_2

@@ -1,0 +1,7 @@
+--- 
+apiVersion: v1
+appVersion: 6.3.7
+description: "A Helm chart for FortiWeb"
+name: fortinet-cnf
+type: application
+version: 0.5.0-1

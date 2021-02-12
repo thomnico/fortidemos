@@ -1,0 +1,18 @@
+--- 
+global: 
+  imageName: fortiweb-cnf
+  imageTag: 6.3.7
+  loadBalancerIP: "10.223.160.60"
+  registry: 
+    pullSecret: fortiweb-cnf
+    url: "registry.eccd-cnf.partnervnflab.xgic.ericsson.se:443"
+  replicaCount: 1
+imageCredentials: 
+  registry: 
+    url: "registry.eccd-cnf.partnervnflab.xgic.ericsson.se:443"
+  repoPath: ""
+service:
+  type: NodePort
+  port: 80
+  portssl: 443
+  gui: 8443

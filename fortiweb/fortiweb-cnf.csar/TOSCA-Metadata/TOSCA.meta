@@ -1,0 +1,6 @@
+CSAR-Version: '1.1'
+Created-By: Fortinet
+Entry-Definitions: Definitions/fortiweb-cnf.yaml
+Entry-Helm-Definitions: Definitions/OtherTemplates/fortiweb-cnf-0.5.0-1.tgz
+Entry-Images: Files/fortiweb-6.3.7.tgz
+TOSCA-Meta-File-Version: '1.0'
